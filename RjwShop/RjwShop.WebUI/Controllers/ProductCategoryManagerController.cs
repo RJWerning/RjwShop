@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RjwShop.Core.Contracts;
 using RjwShop.Core.Models;
 using RjwShop.DataAccess.InMemory;
 
@@ -11,10 +12,10 @@ namespace RjwShop.WebUI.Controllers
     public class ProductCategoryManagerController : Controller
     {
         // GET: ProductCategory
-        InMemoryRepository<ProductCategory> context;
+        IRepository<ProductCategory> context;
 
-        public ProductCategoryManagerController() {
-            context = new InMemoryRepository<ProductCategory>();
+        public ProductCategoryManagerController(IRepository<ProductCategory> categoryContext) {
+            context = categoryContext;
         }
 
         public ActionResult Index() {
