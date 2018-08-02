@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RjwShop.Core.Models;
+using RjwShop.Core.ViewModels;
 using RjwShop.DataAccess.InMemory;
 
 namespace RjwShop.WebUI.Controllers
@@ -11,9 +12,11 @@ namespace RjwShop.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepository context;
+        ProductCategoryRepository productCategories;
 
         public ProductManagerController() {
             context = new ProductRepository();
+            productCategories = new ProductCategoryRepository();
         }
 
         // GET: ProductManager
@@ -24,8 +27,11 @@ namespace RjwShop.WebUI.Controllers
         }
 
         public ActionResult Create() {
-            Product product = new Product();
-            return View(product);
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+            viewModel.Product = new Product();
+            viewModel.ProductCategories = productCategories.Collection();
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -45,7 +51,11 @@ namespace RjwShop.WebUI.Controllers
             if (product == null) {
                 return HttpNotFound();
             } else {
-                return View(product);
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                viewModel.Product = product;
+                viewModel.ProductCategories = productCategories.Collection();
+
+                return View(viewModel);
             }
         }
 

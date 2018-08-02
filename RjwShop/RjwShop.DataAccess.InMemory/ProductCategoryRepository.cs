@@ -7,11 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace RjwShop.DataAccess.InMemory {
-    public class ProduceCategoryRepository {
+    public class ProductCategoryRepository {
         ObjectCache cache = MemoryCache.Default;
         List<ProductCategory> productCategories;
 
-        public ProduceCategoryRepository() {
+        public ProductCategoryRepository() {
             productCategories = cache["productCategories"] as List<ProductCategory>;
             if (productCategories == null) {
                 productCategories = new List<ProductCategory>();

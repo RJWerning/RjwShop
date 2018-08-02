@@ -11,10 +11,10 @@ namespace RjwShop.WebUI.Controllers
     public class ProductCategoryManagerController : Controller
     {
         // GET: ProductCategory
-        ProduceCategoryRepository context;
+        ProductCategoryRepository context;
 
         public ProductCategoryManagerController() {
-            context = new ProduceCategoryRepository();
+            context = new ProductCategoryRepository();
         }
 
         public ActionResult Index() {
