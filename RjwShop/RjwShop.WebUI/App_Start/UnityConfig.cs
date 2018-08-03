@@ -2,6 +2,7 @@ using RjwShop.Core.Contracts;
 using RjwShop.Core.Models;
 using RjwShop.DataAccess.InMemory;
 using RjwShop.DataAccess.SQL;
+using RjwShop.Services;
 using System;
 
 using Unity;
@@ -51,6 +52,9 @@ namespace RjwShop.WebUI
             //container.RegisterType<IRepository<ProductCategory>, InMemoryRepository<ProductCategory>>();
             container.RegisterType<IRepository<Product>, SQLRepository<Product>>();
             container.RegisterType<IRepository<ProductCategory>, SQLRepository<ProductCategory>>();
+            container.RegisterType<IRepository<Basket>, SQLRepository<Basket>>();
+            container.RegisterType<IRepository<BasketItem>, SQLRepository<BasketItem>>();
+            container.RegisterType<IBasketService, BasketService>();
         }
     }
 }

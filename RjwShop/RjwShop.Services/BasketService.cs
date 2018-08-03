@@ -58,7 +58,7 @@ namespace RjwShop.Services {
 
         public void AddToBasket(HttpContextBase httpContext, string productId) {
             Basket basket = GetBasket(httpContext, true);
-            BasketItem item = basket.BasketItems.FirstOrDefault(i => i.Id == productId);
+            BasketItem item = basket.BasketItems.FirstOrDefault(i => i.ProductId == productId);
 
             if (item == null) {
                 item = new BasketItem() {
@@ -90,13 +90,14 @@ namespace RjwShop.Services {
 
             if (basket != null) {
                 var results = (from b in basket.BasketItems
-                              join p in productContext.Collection() on b.ProductId equals p.Id
-                              select new BasketItemViewModel() {
-                                  Id = b.Id,
-                                  Quantity = b.Quantity,
-                                  ProductName = p.Name,
-                                  Image = p.Image,
-                                  Price = p.Price
+                               join p in productContext.Collection() on b.ProductId equals p.Id
+                               select new BasketItemViewModel() {
+                                   Id = b.Id,
+                                   Quantity = b.Quantity,
+                                   ProductName = p.Name,
+                                   Image = p.Image,
+                                   Price = p.Price
+                               }
                               ).ToList();
                 return results;
             } else {
